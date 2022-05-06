@@ -34,9 +34,33 @@ clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
+## execute Unit Tests
+pytest:
+	pytest
+
+## Lint using flake8
+pylint:
+	pylint src/
+
 ## Lint using flake8
 lint:
 	flake8 src
+
+## Logging with Tensorboard
+tensorboard:
+	tensorboard --logdir reports/tensorboard/logs/
+
+## run model training
+run: requirements
+	$(PYTHON_INTERPRETER) src/trainer/run.py
+
+## run model training with GPU and Tensorboard
+run_tensorboard: requirements
+	$(PYTHON_INTERPRETER) src/trainer/run.py --tensorboard_logs True
+
+## run model training with Neptune.ai
+run_neptune: requirements
+	$(PYTHON_INTERPRETER) src/trainer/run.py --neptune_logs True
 
 ## Upload Data to S3
 sync_data_to_s3:

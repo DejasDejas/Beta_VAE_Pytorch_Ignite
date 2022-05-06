@@ -1,0 +1,21 @@
+name: train-my-model
+on: [push]
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: iterative/setup-cml@v1
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+      - name: run model training neptune
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          neptune_token: ${{ secrets.NEPTUNE_API_TOKEN }}
+        run: |
+          pip install -r requirements.txt
+          pip install neptune-client
+          
+          python src/trainer/run.py --neptune_logs True --neptune_api_token \
+          ${{ secrets.NEPTUNE_API_TOKEN }}
