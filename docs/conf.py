@@ -13,6 +13,7 @@
 
 import os
 import sys
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -26,10 +27,11 @@ sys.path.insert(0, os.path.abspath('.'))
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
-   'sphinx.ext.duration',
-   'sphinx.ext.doctest',
-   'sphinx.ext.autodoc',
-   'sphinx.ext.autosummary',
+    'sphinx.ext.duration',
+    'sphinx.ext.doctest',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.napoleon'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -95,7 +97,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "sphinx_rtd_theme" # 'default'
+html_theme = "sphinx_rtd_theme"  # 'default'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -170,7 +172,6 @@ html_static_path = ['_static']
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'MR_VAEdoc'
 
-
 # -- Options for LaTeX output --------------------------------------------------
 
 latex_elements = {
@@ -235,7 +236,8 @@ man_pages = [
 texinfo_documents = [
     ('index', 'MR_VAE', u'MR-VAE Documentation',
      u"Julien Dejasmin", 'MR-VAE',
-     'This project presents the MR-VAE deep learning model capable of representing an image with a mixed latent and disentangled representation. MR-VAE uses the binary and continuous latent representation to represent respectively the variability and the structural image information. From such a representation it is then possible to vary a precise aspect of the image being represented along the real vector in the latent space and/or to vary the class of the image being represented as several structural elements corresponding to the binary code of the latent space.', 'Miscellaneous'),
+     'This project presents the MR-VAE deep learning model capable of representing an image with a mixed latent and disentangled representation. MR-VAE uses the binary and continuous latent representation to represent respectively the variability and the structural image information. From such a representation it is then possible to vary a precise aspect of the image being represented along the real vector in the latent space and/or to vary the class of the image being represented as several structural elements corresponding to the binary code of the latent space.',
+     'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.
