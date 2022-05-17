@@ -22,7 +22,7 @@ def setup_custom_logger(name: str) -> logging.Logger:
         This is a note
 
     Examples:
-        >>> from config.logger import setup_custom_logger
+        >>> from src.config.logger_initialization import setup_custom_logger
         >>> log = setup_custom_logger(__name__)
         >>> log.info("test")
     """
@@ -35,3 +35,8 @@ def setup_custom_logger(name: str) -> logging.Logger:
     logger.setLevel(logging.DEBUG)
     logger.addHandler(handler)
     return logger
+
+
+if __name__ == "__main__":
+    _log = setup_custom_logger(__name__)
+    _log.info("test")

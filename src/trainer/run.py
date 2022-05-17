@@ -7,7 +7,10 @@ import argparse
 from src.trainer.utils import str2bool
 from src.trainer.trainer import trainer
 from src.data.make_mnist_dataset import load_mnist_data
-from src.models.model import MR_VAE
+from src.models.model import VAE
+from src.config.logger_initialization import setup_custom_logger
+
+log = setup_custom_logger(__name__)
 
 
 def main(args):
@@ -18,8 +21,12 @@ def main(args):
     """
     # data:
     train_loader, test_loader = load_mnist_data(batch_size_train=args.batch_size)
+    img_shape = train_loader.dataset[0][0].shape
     # model:
-    model = MR_VAE()
+    model = VAE(args.latent_dim, img_shape)
+    # log.info(f"Model: {model}")
+    num_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    log.info(f"Number of trainable parameters: {num_params:,}")
     # train:
     trainer(model, train_loader, test_loader, args)
 
@@ -30,7 +37,7 @@ if __name__ == "__main__":
     parser.add_argument("--seed", type=int, default=42, help="Random seed.")
     # Training settings:
     parser.add_argument(
-        "--lr", type=float, default=0.1, help="learning rate (default: 0.01)"
+        "--lr", type=float, default=0.01, help="learning rate (default: 0.01)"
     )
     parser.add_argument(
         "--momentum", type=float, default=0.5, help="SGD momentum (default: 0.5)"
@@ -39,11 +46,19 @@ if __name__ == "__main__":
         "--epochs", type=int, default=10, help="number of epochs to train (default: 10)"
     )
     parser.add_argument(
-        "--batch_size", type=int, default=64, help="input batch size for training (default: 64)"
+        "--batch_size", type=int, default=32, help="input batch size for training (default: 32)"
     )
     parser.add_argument(
         "--val_batch_size", type=int, default=1000,
         help="input batch size for validation (default: 1000)"
+    )
+    parser.add_argument(
+        "--latent_dim", type=int, default=20,
+        help="dimensionality of the latent space (default: 20)"
+    )
+    parser.add_argument(
+        "--beta", type=float, default=1,
+        help="beta for the KL divergence (default: 1)"
     )
     # validation batch size
     # optimiser
@@ -90,6 +105,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "--neptune_log", default=True, type=str2bool,
         help="True if you want to use early neptune logs.",
+    )
+    parser.add_argument(
+        "--pbar", default=True, type=str2bool,
+        help="True if you want to use progress bar.",
     )
     parser.add_argument(
         "--neptune_api_token",

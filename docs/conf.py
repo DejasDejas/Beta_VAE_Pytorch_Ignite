@@ -189,7 +189,7 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
     ('index',
-     'MR_VAE.tex',
+     'Beta_VAE_Pytorch_Ignite.tex',
      u'MR-VAE Documentation',
      u"Julien Dejasmin", 'manual'),
 ]
@@ -220,7 +220,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'MR_VAE', u'MR-VAE Documentation',
+    ('index', 'Beta_VAE_Pytorch_Ignite', u'MR-VAE Documentation',
      [u"Julien Dejasmin"], 1)
 ]
 
@@ -234,7 +234,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'MR_VAE', u'MR-VAE Documentation',
+    ('index', 'Beta_VAE_Pytorch_Ignite', u'MR-VAE Documentation',
      u"Julien Dejasmin", 'MR-VAE',
      'This project presents the MR-VAE deep learning model capable of representing an image with a mixed latent and disentangled representation. MR-VAE uses the binary and continuous latent representation to represent respectively the variability and the structural image information. From such a representation it is then possible to vary a precise aspect of the image being represented along the real vector in the latent space and/or to vary the class of the image being represented as several structural elements corresponding to the binary code of the latent space.',
      'Miscellaneous'),

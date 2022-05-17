@@ -65,8 +65,8 @@ def load_mnist_data(batch_size_train: int = 64, num_workers: int = 0,
                                   num_workers=num_workers)
 
     logger.info("Load MNIST dataset from torchvision and save to raw folder.")
-    logger.info(f"Train dataset size: {train_loader.dataset.__len__()}")
-    logger.info(f"Test dataset size: {test_loader.dataset.__len__()}")
+    logger.info(f"Train dataset size: {train_loader.dataset.__len__():,}")
+    logger.info(f"Test dataset size: {test_loader.dataset.__len__():,}")
     logger.info(f"Images shape: {train_loader.dataset[0][0].shape}")
 
     return train_loader, test_loader

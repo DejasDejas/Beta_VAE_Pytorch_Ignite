@@ -1,27 +1,26 @@
 MR-VAE
 ==============================
 
-This project presents the MR-VAE deep learning model capable of representing an image with a mixed
-latent and disentangled representation. \
-MR-VAE uses the binary and continuous latent representation to represent respectively the 
-variability and the structural image information. \
+This project presents a classic Beta-VAe deep learning model capable of representing an image with disentangled latent representation. \
+Beta-VAE uses continuous latent representation to represent the 
+variability image information. \
 From such a representation it is then possible to vary a precise aspect of the image being
-represented along the real vector in the latent space and/or to vary the class of the image 
-being represented as several structural elements corresponding to the binary 
-code of the latent space.
+represented along the real vector in the latent space.
+
+We implement the model in PyTorch Ignite framework and use Neptune for monitoring.
 
 -- Project Status: [On-Hold]
 
 ## Project Intro:
 
-The purpose of this project is to present MR-VAE as a deep learning model capable of representing 
-an image with a mixed latent and disentangled representation. \
-
-Note: the project development is currently on hold.
+The purpose of this project is to present Beta-VAE as a deep learning model capable of representing 
+an image with a disentangled latent representation. \
+This project also shows how to use the Ignite library to implement code with Pytorch and how to use
+neptune to monitor metrics.
 
 ## Method used:
 
-In this project, we develop the MR-VAE model in python using the [PyTorch](https://pytorch.org/). \
+In this project, we develop the Beta-VAE model in python using the [PyTorch](https://pytorch.org/). \
 The model is based on the [VAE](https://arxiv.org/abs/1312.6114).
 
 We ensure the training monitoring with [TensorBoard](https://www.tensorflow.org/tensorboard) and/or [Neptune.ai](https://neptune.ai/). \
@@ -35,7 +34,7 @@ We use GitHub Actions to run the training and testing.
 
 ### Dataset:
 
-To illustrate the MR-VAE model, we use [MNIST dataset](http://yann.lecun.com/exdb/mnist/) in first time. \
+To illustrate the Beta-VAE model, we use [MNIST dataset](http://yann.lecun.com/exdb/mnist/) in first time. \
 The dataset is composed of 28x28 grayscale images of handwritten digits.
 
 ### Open notebook on Google Colab:
