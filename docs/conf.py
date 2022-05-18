@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=invalid-name
+# pylint: disable=invalid-name, redundant-u-string-prefix
 """Configuration file for Sphinx documentation builder."""
 #
 # MR-VAE documentation build configuration file, created by
