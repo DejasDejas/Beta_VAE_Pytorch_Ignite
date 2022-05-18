@@ -3,7 +3,10 @@
 import numpy as np
 from torch import nn
 from torchsummary import summary
-import torch
+from torch import exp as torch_exp
+from torch import randn_like
+from torch import rand as torch_rand
+from torch import sigmoid
 import torch.nn.functional as F
 from src.models.utils import kaiming_init
 
@@ -18,8 +21,8 @@ def reparameterize(_mu, log_var):
     Returns:
         z (torch.Tensor): Sampled latent vector.
     """
-    std = torch.exp(0.5 * log_var)
-    eps = torch.randn_like(std)
+    std = torch_exp(0.5 * log_var)
+    eps = randn_like(std)
     return eps.mul(std).add_(_mu)
 
 
@@ -34,8 +37,6 @@ class VAE(nn.Module):
             _latent_dim (int): Dimension of the latent space.
             _img_shape (tuple): Shape of the input image.
         """
-        super(VAE, self).__init__()
-
         self.img_shape = _img_shape
 
         self.input_layer = nn.Linear(int(np.prod(self.img_shape)), 400)
@@ -66,7 +67,7 @@ class VAE(nn.Module):
             decoder output (torch.Tensor): Decoder output.
         """
         hidden = F.relu(self.sampled_layer(latent_sampled))
-        return torch.sigmoid(self.output_layer(hidden))
+        return sigmoid(self.output_layer(hidden))
 
     def forward(self, img):
         """
@@ -102,8 +103,6 @@ class ConvVAE(nn.Module):
     """
     def __init__(self, _latent_dim=16, image_channels=1, init_channels=8,
                  kernel_size=3):
-        super(ConvVAE, self).__init__()
-
         # encoder
         self.encoder_1 = nn.Conv2d(
             in_channels=image_channels,
@@ -202,7 +201,7 @@ class ConvVAE(nn.Module):
         img = F.relu(self.decoder_1(latent))
         img = F.relu(self.decoder_2(img))
         img = F.relu(self.decoder_3(img))
-        return torch.sigmoid(self.decoder_4(img))
+        return sigmoid(self.decoder_4(img))
 
     def forward(self, img):
         """
@@ -234,7 +233,7 @@ if __name__ == "__main__":
     model_fc = VAE(_latent_dim=2, _img_shape=(1, 28, 28))
     summary(model_fc, (1, 28, 28))
 
-    inputs = torch.rand(4, 1, 28, 28)
+    inputs = torch_rand(4, 1, 28, 28)
     model_cnn = ConvVAE(_latent_dim=2)
     summary(model_cnn, (1, 28, 28))
     outputs, _, _, _ = model_cnn(inputs)

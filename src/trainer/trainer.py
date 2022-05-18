@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pylint: disable = logging-fstring-interpolation, import-error, too-many-locals, invalid-name
 # pylint: disable = unused-argument, broad-except, logging-format-interpolation, unused-variable
-# pylint: disable = too-many-statements
+# pylint: disable = too-many-statements, no-name-in-module, consider-using-f-string
 """
 Trainer class for training the model, evaluating the model,saving and monitoring the model.
 """
@@ -233,7 +233,7 @@ def trainer(model, train_loader, test_loader, args):
         avg_mse = metrics['Eval_MSE']
         avg_bce = metrics['Eval_BCE']
         avg_kld = metrics['Eval_KLD']
-        print(
+        logger.info(
             mode + "Results - Epoch {} - Avg loss: {:.2f} Avg mse: {:.2f} Avg bce: {:.2f} Avg "
                    "kld: {:.2f}"
             .format(engine.state.epoch, avg_loss, avg_mse, avg_bce, avg_kld))
@@ -262,9 +262,9 @@ def trainer(model, train_loader, test_loader, args):
         avg_bce = engine.state.metrics['RunningAverage_recon_loss']
         avg_kld = engine.state.metrics['RunningAverage_kl_loss']
         lr_scheduler.step(avg_loss)  # update learning rate
-        print("Trainer Results - Epoch {} - Lr:{} - Avg loss: {:.2f} Avg bce: {:.2f} Avg "
-              "kld: {:.2f}".format(engine.state.epoch, optimizer.param_groups[0]["lr"],
-                                   avg_loss, avg_bce, avg_kld))
+        logger.info("Trainer Results - Epoch {} - Lr:{} - Avg loss: {:.2f} Avg bce: {:.2f} Avg "
+                    "kld: {:.2f}".format(engine.state.epoch, optimizer.param_groups[0]["lr"],
+                                         avg_loss, avg_bce, avg_kld))
 
     def compare_images(engine, save_img=False):
         """

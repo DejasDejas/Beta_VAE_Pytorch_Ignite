@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=invalid-name
+"""Configuration file for Sphinx documentation builder."""
 #
 # MR-VAE documentation build configuration file, created by
 # sphinx-quickstart.
@@ -47,7 +49,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'MR-VAE'
+project = 'Beta-VAE-Pytorch-Ignite'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -170,7 +172,7 @@ html_static_path = ['_static']
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'MR_VAEdoc'
+htmlhelp_basename = 'Beta-VAE-Pytorch-Ignite_doc'
 
 # -- Options for LaTeX output --------------------------------------------------
 
@@ -190,8 +192,8 @@ latex_elements = {
 latex_documents = [
     ('index',
      'Beta_VAE_Pytorch_Ignite.tex',
-     u'MR-VAE Documentation',
-     u"Julien Dejasmin", 'manual'),
+     'Beta-VAE-Pytorch-Ignite Documentation',
+     "Julien Dejasmin", 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -220,8 +222,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'Beta_VAE_Pytorch_Ignite', u'MR-VAE Documentation',
-     [u"Julien Dejasmin"], 1)
+    ('index', 'Beta_VAE_Pytorch_Ignite',
+     ["Julien Dejasmin"], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -234,9 +236,12 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'Beta_VAE_Pytorch_Ignite', u'MR-VAE Documentation',
-     u"Julien Dejasmin", 'MR-VAE',
-     'This project presents the MR-VAE deep learning model capable of representing an image with a mixed latent and disentangled representation. MR-VAE uses the binary and continuous latent representation to represent respectively the variability and the structural image information. From such a representation it is then possible to vary a precise aspect of the image being represented along the real vector in the latent space and/or to vary the class of the image being represented as several structural elements corresponding to the binary code of the latent space.',
+    ('index', 'Beta_VAE_Pytorch_Ignite', "Julien Dejasmin",
+     'This project presents a classic Beta-VAe deep learning model capable of representing an '
+     'image with disentangled latent representation. Beta-VAE uses continuous latent '
+     'representation to represent the variability image information. From such a representation '
+     'it is then possible to vary a precise aspect of the image being represented along the real '
+     'vector in the latent space.',
      'Miscellaneous'),
 ]
 

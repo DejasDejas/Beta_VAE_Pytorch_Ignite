@@ -1,8 +1,7 @@
 """System module."""
 # pylint: disable=import-error
 from unittest import TestCase
-import torch
-
+from torch import any as torch_any
 from src.data.make_mnist_dataset import load_mnist_data
 
 train_loader, test_loader = load_mnist_data()
@@ -30,13 +29,13 @@ class TestData(TestCase):
         for sample, _ in train_data:
             # self.assertGreaterEqual(1, sample.max())
             self.assertLessEqual(-1, sample.min())
-            # self.assertTrue(torch.any(sample < 0))
-            self.assertTrue(torch.any(sample > 0))
+            # self.assertTrue(ttorch_any(sample < 0))
+            self.assertTrue(torch_any(sample > 0))
         for sample, _ in test_data:
             # self.assertGreaterEqual(1, sample.max())
             self.assertLessEqual(-1, sample.min())
-            # self.assertTrue(torch.any(sample < 0))
-            self.assertTrue(torch.any(sample > 0))
+            # self.assertTrue(torch_any(sample < 0))
+            self.assertTrue(torch_any(sample > 0))
 
     def test_single_process_dataloader(self):
         """
