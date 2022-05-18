@@ -1,5 +1,5 @@
 """System module."""
-# pylint: disable=import-error
+# pylint: disable=import-error, no-name-in-module
 from unittest import TestCase
 from torch import any as torch_any
 from src.data.make_mnist_dataset import load_mnist_data

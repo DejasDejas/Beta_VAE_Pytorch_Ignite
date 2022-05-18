@@ -2,6 +2,7 @@
 # pylint: disable = logging-fstring-interpolation, import-error, too-many-locals, invalid-name
 # pylint: disable = unused-argument, broad-except, logging-format-interpolation, unused-variable
 # pylint: disable = too-many-statements, no-name-in-module, consider-using-f-string
+# pylint: disable = logging-not-lazy
 """
 Trainer class for training the model, evaluating the model,saving and monitoring the model.
 """

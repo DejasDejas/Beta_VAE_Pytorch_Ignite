@@ -1,13 +1,13 @@
-# pylint: disable=import-error, too-many-instance-attributes
+# pylint: disable=import-error, too-many-instance-attributes, no-name-in-module
 """Model module for building neural network models."""
 import numpy as np
 from torch import nn
-from torchsummary import summary
 from torch import exp as torch_exp
 from torch import randn_like
 from torch import rand as torch_rand
 from torch import sigmoid
 import torch.nn.functional as F
+from torchsummary import summary
 from src.models.utils import kaiming_init
 
 
@@ -37,6 +37,7 @@ class VAE(nn.Module):
             _latent_dim (int): Dimension of the latent space.
             _img_shape (tuple): Shape of the input image.
         """
+        super().__init__()
         self.img_shape = _img_shape
 
         self.input_layer = nn.Linear(int(np.prod(self.img_shape)), 400)
@@ -101,9 +102,9 @@ class ConvVAE(nn.Module):
     """
     Convolutional Variational Autoencoder.
     """
-    def __init__(self, _latent_dim=16, image_channels=1, init_channels=8,
-                 kernel_size=3):
+    def __init__(self, _latent_dim=16, image_channels=1, init_channels=8, kernel_size=3):
         # encoder
+        super().__init__()
         self.encoder_1 = nn.Conv2d(
             in_channels=image_channels,
             out_channels=init_channels,
