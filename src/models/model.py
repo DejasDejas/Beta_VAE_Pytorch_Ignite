@@ -1,7 +1,8 @@
-# pylint: disable=import-error
+# pylint: disable=import-error, too-many-instance-attributes
 """Model module for building neural network models."""
 import numpy as np
 from torch import nn
+from torchsummary import summary
 import torch
 import torch.nn.functional as F
 from src.models.utils import kaiming_init
@@ -96,8 +97,11 @@ class VAE(nn.Module):
 
 
 class ConvVAE(nn.Module):
+    """
+    Convolutional Variational Autoencoder.
+    """
     def __init__(self, _latent_dim=16, image_channels=1, init_channels=8,
-                 kernel_size=4):
+                 kernel_size=3):
         super(ConvVAE, self).__init__()
 
         # encoder
@@ -149,19 +153,19 @@ class ConvVAE(nn.Module):
             out_channels=init_channels * 4,
             kernel_size=kernel_size,
             stride=2,
-            padding=1
+            padding=0
         )
         self.decoder_3 = nn.ConvTranspose2d(
             in_channels=init_channels * 4,
             out_channels=init_channels * 2,
             kernel_size=kernel_size,
             stride=2,
-            padding=1
+            padding=0
         )
         self.decoder_4 = nn.ConvTranspose2d(
             in_channels=init_channels * 2,
             out_channels=image_channels,
-            kernel_size=kernel_size,
+            kernel_size=kernel_size-1,
             stride=2,
             padding=1
         )
@@ -213,7 +217,7 @@ class ConvVAE(nn.Module):
             log_var (torch.Tensor): Log variance of the latent distribution.
         """
         _mu, log_var = self.encode(img)
-        latent = self.reparameterize(_mu, log_var)
+        latent = reparameterize(_mu, log_var)
         x_recons = self.decode(latent)
         return x_recons, latent, _mu, log_var
 
@@ -228,7 +232,10 @@ class ConvVAE(nn.Module):
 
 if __name__ == "__main__":
     model_fc = VAE(_latent_dim=2, _img_shape=(1, 28, 28))
-    print(model_fc)
+    summary(model_fc, (1, 28, 28))
 
+    inputs = torch.rand(4, 1, 28, 28)
     model_cnn = ConvVAE(_latent_dim=2)
-    print(model_cnn)
+    summary(model_cnn, (1, 28, 28))
+    outputs, _, _, _ = model_cnn(inputs)
+    print(outputs.shape)
