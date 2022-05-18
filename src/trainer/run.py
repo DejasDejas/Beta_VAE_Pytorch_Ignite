@@ -8,7 +8,7 @@ import argparse
 from src.trainer.utils import str2bool
 from src.trainer.trainer import trainer
 from src.data.make_mnist_dataset import load_mnist_data
-from src.models.model import VAE
+from src.models.model import VAE, ConvVAE
 from src.config.logger_initialization import setup_custom_logger
 
 log = setup_custom_logger(__name__)
@@ -24,7 +24,10 @@ def main(args):
     train_loader, test_loader = load_mnist_data(batch_size_train=args.batch_size)
     img_shape = train_loader.dataset[0][0].shape
     # model:
-    model = VAE(args.latent_dim, img_shape)
+    if args.model == 'vae':
+        model = VAE(args.latent_dim, img_shape)
+    elif args.model == 'conv_vae':
+        model = ConvVAE(_latent_dim=args.latent_dim)
     # log.info(f"Model: {model}")
     num_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     log.info(f"Number of trainable parameters: {num_params:,}")
@@ -54,12 +57,15 @@ if __name__ == "__main__":
         help="input batch size for validation (default: 1000)"
     )
     parser.add_argument(
-        "--latent_dim", type=int, default=20,
-        help="dimensionality of the latent space (default: 20)"
+        "--latent_dim", type=int, default=16,
+        help="dimensionality of the latent space (default: 16)"
     )
     parser.add_argument(
         "--beta", type=float, default=1,
         help="beta for the KL divergence (default: 1)"
+    )
+    parser.add_argument(
+        "--model", type=str, default="vae", help="model to train (default: vae)"
     )
     # validation batch size
     # optimiser
