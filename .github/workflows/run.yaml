@@ -18,5 +18,5 @@ jobs:
           pip install neptune-client
           pip install pytorch-ignite
           
-          python src/trainer/run.py --model conv_vae --neptune_logs True --neptune_api_token \
+          python src/trainer/run.py --model conv_vae --neptune_log True --neptune_api_token \
           ${{ secrets.NEPTUNE_API_TOKEN }}

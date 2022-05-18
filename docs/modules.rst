@@ -3,12 +3,12 @@ Modules
 
 Logger:
 ^^^^^^^
-.. automodule:: config.logger
+.. automodule:: config.logger_initialization
    :members:
 
 Data:
 ^^^^^
-.. automodule:: src.data.make_dataset
+.. automodule:: src.data.make_mnist_dataset
    :members:
 
 Model:
@@ -18,6 +18,7 @@ Model:
 
    src.models.model
    src.models.custom_layer
+   src.models.utils
 
 Built models:
 --------------
@@ -27,6 +28,11 @@ Built models:
 Model's custom layers:
 ----------------------
 .. automodule:: src.models.custom_layer
+   :members:
+
+Model's utils:
+----------------------
+.. automodule:: src.models.utils
    :members:
 
 Training:
