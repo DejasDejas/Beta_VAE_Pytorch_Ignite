@@ -54,10 +54,6 @@ tensorboard:
 run: requirements
 	$(PYTHON_INTERPRETER) src/trainer/run.py
 
-## run model training with GPU and Tensorboard
-run_tensorboard: requirements
-	$(PYTHON_INTERPRETER) src/trainer/run.py --tensorboard_logs True
-
 ## run model training with Neptune.ai
 run_neptune: requirements
 	$(PYTHON_INTERPRETER) src/trainer/run.py --neptune_logs True

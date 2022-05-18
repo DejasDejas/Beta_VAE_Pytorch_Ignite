@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable = logging-fstring-interpolation
 """
 Run the training process with the specified configuration passed as command line arguments.
 """
@@ -43,7 +44,7 @@ if __name__ == "__main__":
         "--momentum", type=float, default=0.5, help="SGD momentum (default: 0.5)"
     )
     parser.add_argument(
-        "--epochs", type=int, default=10, help="number of epochs to train (default: 10)"
+        "--epochs", type=int, default=20, help="number of epochs to train (default: 10)"
     )
     parser.add_argument(
         "--batch_size", type=int, default=32, help="input batch size for training (default: 32)"

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
+# pylint: disable = logging-fstring-interpolation, import-error
 """
 This module contains the code to create the MNIST dataset.
 """
 import os
 
-from torch.utils import data
 from torch.utils.data import DataLoader
 from torchvision import transforms, datasets
 
@@ -15,7 +15,7 @@ logger = setup_custom_logger(__name__)
 
 
 def load_mnist_data(batch_size_train: int = 64, num_workers: int = 0,
-                    transform: object = None) -> (data.DataLoader, data.DataLoader):
+                    transform: object = None) -> (DataLoader, DataLoader):
     """
     Load MNIST data and return a test and train DataLoader.
     Args:
@@ -54,15 +54,15 @@ def load_mnist_data(batch_size_train: int = 64, num_workers: int = 0,
                                transform=test_transform)
 
     # create data loaders:
-    train_loader = data.DataLoader(train_data,
-                                   batch_size=batch_size_train,
-                                   shuffle=True,
-                                   num_workers=num_workers)
+    train_loader = DataLoader(train_data,
+                              batch_size=batch_size_train,
+                              shuffle=True,
+                              num_workers=num_workers)
 
-    test_loader = data.DataLoader(test_data,
-                                  batch_size=1000,
-                                  shuffle=True,
-                                  num_workers=num_workers)
+    test_loader = DataLoader(test_data,
+                             batch_size=1000,
+                             shuffle=True,
+                             num_workers=num_workers)
 
     logger.info("Load MNIST dataset from torchvision and save to raw folder.")
     logger.info(f"Train dataset size: {train_loader.dataset.__len__():,}")

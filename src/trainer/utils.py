@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable = logging-fstring-interpolation, import-error
 """
 Utils for the trainer module and the runner module.
 """
@@ -30,10 +31,9 @@ def str2bool(_string: str) -> bool:
     """
     if _string.lower() in {'yes', 'true', 't', 'y', '1'}:
         return True
-    elif _string.lower() in {'no', 'false', 'f', 'n', '0'}:
+    if _string.lower() in {'no', 'false', 'f', 'n', '0'}:
         return False
-    else:
-        raise ValueError('Not a valid boolean string')
+    raise ValueError('Not a valid boolean string')
 
 
 def gpu_config(model):
@@ -79,4 +79,3 @@ def randomness_seed(seed):
     random.seed(seed)
     np.random.seed(seed)
     logger.info(f"Using manual seed: {seed}")
-
